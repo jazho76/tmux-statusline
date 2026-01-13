@@ -1,17 +1,41 @@
 # Tmux Statusline
 
-Personalized Tmux statusline based on [wfxr/tmux-power](https://github.com/wfxr/tmux-power/tree/master).
+![screenshot](./images/screenshot.png)
 
-## Installation
+A minimal, grayscale tmux statusline focused on clarity and low visual noise.
+
+Inspired by [wfxr/tmux-power](https://github.com/wfxr/tmux-power/tree/master), but simplified and opinionated. Unlike tmux-power, this statusline favors a fixed, minimal layout over extensive configurability, aiming for simplicity while will also (probably) serve me as a solid starting point for building other custom statusline.
+
+## Features
+
+- Clean palette
+- Powerline-style separators
+- Session & window awareness
+- Prefix/zoom indicators
+- Pane title on the right for context
+- Optional Pomodoro integration
+
+## Requirements
+
+- tmux ≥ 3.2
+- Nerd Font (for icons and separators)
+- True color terminal recommended
+
+## Installation (TPM)
 
 ```
-set -g @plugin 'jpinilloslr/tmux-statusline'
+set -g @plugin 'jazho76/tmux-statusline'
 ```
 
-## Optional extensions
+Reload tmux environment:
 
+```
+tmux source-file ~/.tmux.conf
+```
+
+## Optional Extensions
+
+Pomodoro support (used if available):
 ```
 set -g @plugin 'olimorris/tmux-pomodoro-plus'
 ```
-
-![screenshot](./images/screenshot.png)
