@@ -33,6 +33,17 @@ Reload tmux environment:
 tmux source-file ~/.tmux.conf
 ```
 
+## Configuration
+
+| Option                      | Default     | Description  |
+| --------------------------- | ----------- | ------------ |
+| `@statusline-accent-color`  | `#888888`   | Accent color |
+
+Example:
+```
+set -g @statusline-accent-color "#ff79c6"
+```
+
 ## Optional Extensions
 
 Pomodoro support (used if available):

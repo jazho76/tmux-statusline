@@ -2,10 +2,16 @@ set_opt() {
   tmux set-option -gq "$1" "$2"
 }
 
+get_opt() {
+  local val
+  val=$(tmux show-option -gqv "$1")
+  echo "${val:-$2}"
+}
+
 # Config params
 rarrow=''
 larrow=''
-AC='#888888'
+AC=$(get_opt "@statusline-accent-color" "#888888")
 G1=#262626 #235
 G01=#303030 #236
 G2=#3a3a3a #237
