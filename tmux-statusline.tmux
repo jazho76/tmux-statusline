@@ -34,7 +34,7 @@ set_opt status-left "$LS"
 set_opt status-right-bg "$BG"
 set_opt status-right-fg "$G5"
 set_opt status-right-length 150
-RS="#[fg=$AC,bg=$G2]$larrow#[fg=$G1,bg=$AC] #{pomodoro_status} #{?window_zoomed_flag,,󱇙} #{pane_title}#[fg=$AC,bg=$AC]."
+RS="#[fg=$AC,bg=$G2]$larrow#[fg=$G1,bg=$AC] #{pomodoro_status} #{?window_zoomed_flag,,󱇙} #{=/15/…:pane_title}#[fg=$AC,bg=$AC]."
 RS="#[fg=$G2]$larrow#[fg=$AC,bg=$G2]  #{server_sessions} $RS"
 set_opt status-right "$RS"
 
