@@ -14,6 +14,7 @@ Inspired by [wfxr/tmux-power](https://github.com/wfxr/tmux-power/tree/master), b
 - Prefix/zoom indicators
 - Pane title on the right for context
 - Optional Pomodoro integration
+- Per-environment overrides (color, icon, label, decorators) for distinguishing machines at a glance
 
 ## Requirements
 
@@ -24,7 +25,7 @@ Inspired by [wfxr/tmux-power](https://github.com/wfxr/tmux-power/tree/master), b
 ## Installation (TPM)
 
 ```
-set -g @plugin 'jazho76/tmux-statusline'
+set -g @plugin 'jpinilloslr/tmux-statusline'
 ```
 
 Reload tmux environment:
@@ -35,13 +36,22 @@ tmux source-file ~/.tmux.conf
 
 ## Configuration
 
-| Option                      | Default     | Description  |
-| --------------------------- | ----------- | ------------ |
-| `@statusline-accent-color`  | `#888888`   | Accent color |
+| Option                         | Default     | Description                                                |
+| ------------------------------ | ----------- | ---------------------------------------------------------- |
+| `@statusline-accent-color`     | `#888888`   | Accent color (session block, windows, decorators, borders) |
+| `@statusline-prefix-color`     | `#888888`   | Color of the leading prefix block and trailing pane block  |
+| `@statusline-prefix-icon`      | ``          | Glyph shown in the leading block when prefix is inactive   |
+| `@statusline-prefix-label`     | (empty)     | Optional short label rendered next to the prefix icon      |
+| `@statusline-decorator-right`  | ``          | Right-pointing segment separator                           |
+| `@statusline-decorator-left`   | ``          | Left-pointing segment separator                            |
 
-Example:
+Example: per-host coloring and labeling so the same statusline reads differently across machines (drop into `~/.config/tmux/local.conf` or equivalent):
 ```
-set -g @statusline-accent-color "#ff79c6"
+set -g @statusline-prefix-color '#0ea5e9'
+set -g @statusline-prefix-icon  ''
+set -g @statusline-prefix-label 'host'
+set -g @statusline-decorator-right ''
+set -g @statusline-decorator-left  ''
 ```
 
 ## Optional Extensions
