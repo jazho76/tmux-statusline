@@ -15,11 +15,11 @@ AC=$(get_opt "@statusline-accent-color" '#888888')
 PC=$(get_opt "@statusline-prefix-color" '#888888')
 PI=$(get_opt "@statusline-prefix-icon" '')
 PL=$(get_opt "@statusline-prefix-label" '')
-G1=#262626 #235
-G2=#3a3a3a #237
-G3=#444444 #238
-G4=#626262 #241
-G5=#767676 #243
+G1=$(get_opt "@statusline-bg-color"      '#262626')
+G2=$(get_opt "@statusline-segment-color" '#3a3a3a')
+G3=$(get_opt "@statusline-border-color"  '#444444')
+G4=$(get_opt "@statusline-fg-color"      '#626262')
+G5=$(get_opt "@statusline-muted-color"   '#767676')
 FG="$G4"
 BG="$G1"
 
@@ -72,3 +72,4 @@ set_opt message-command-style "fg=$AC,bg=$BG"
 # Clock
 set_opt clock-mode-colour "$AC"
 set_opt clock-mode-style 24
+

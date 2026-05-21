@@ -36,16 +36,22 @@ tmux source-file ~/.tmux.conf
 
 ## Configuration
 
-| Option                         | Default     | Description                                                |
-| ------------------------------ | ----------- | ---------------------------------------------------------- |
-| `@statusline-accent-color`     | `#888888`   | Accent color (session block, windows, decorators, borders) |
-| `@statusline-prefix-color`     | `#888888`   | Color of the leading prefix block and trailing pane block  |
-| `@statusline-prefix-icon`      | ``          | Glyph shown in the leading block when prefix is inactive   |
-| `@statusline-prefix-label`     | (empty)     | Optional short label rendered next to the prefix icon      |
-| `@statusline-decorator-right`  | ``          | Right-pointing segment separator                           |
-| `@statusline-decorator-left`   | ``          | Left-pointing segment separator                            |
+| Option                        | Default   | Description                                                |
+| ----------------------------- | --------- | ---------------------------------------------------------- |
+| `@statusline-accent-color`    | `#888888` | Accent color (session block, windows, decorators, borders) |
+| `@statusline-prefix-color`    | `#888888` | Color of the leading prefix block and trailing pane block  |
+| `@statusline-bg-color`        | `#262626` | Bar background and dark text on the pills/active window    |
+| `@statusline-segment-color`   | `#3a3a3a` | Raised segments (session, session count, inactive windows) |
+| `@statusline-border-color`    | `#444444` | Inactive pane borders and display-panes numbers            |
+| `@statusline-fg-color`        | `#626262` | Default bar text and copy-mode text                        |
+| `@statusline-muted-color`     | `#767676` | Status-left/right base foreground (fallback)               |
+| `@statusline-prefix-icon`     | ``       | Glyph shown in the leading block when prefix is inactive   |
+| `@statusline-prefix-label`    | (empty)   | Optional short label rendered next to the prefix icon      |
+| `@statusline-decorator-right` | ``       | Right-pointing segment separator                           |
+| `@statusline-decorator-left`  | ``       | Left-pointing segment separator                            |
 
 Example: per-host coloring and labeling so the same statusline reads differently across machines (drop into `~/.config/tmux/local.conf` or equivalent):
+
 ```
 set -g @statusline-prefix-color '#0ea5e9'
 set -g @statusline-prefix-icon  ''
@@ -57,6 +63,7 @@ set -g @statusline-decorator-left  ''
 ## Optional Extensions
 
 Pomodoro support (used if available):
+
 ```
 set -g @plugin 'olimorris/tmux-pomodoro-plus'
 ```
