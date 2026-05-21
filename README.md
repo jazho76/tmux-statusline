@@ -73,12 +73,46 @@ set -g @statusline-theme 'mono'
 
 Available themes:
 
+Dark:
+
 - `mono` - minimal grayscale (default)
 - `tokyonight` - Tokyo Night
+- `tokyonight-storm` - Tokyo Night Storm
 - `catppuccin` - Catppuccin Mocha
 - `nord` - Nord
 - `gruvbox` - Gruvbox dark
-- `rosepine` - Rose Pine
+- `gruvbox-material` - Gruvbox Material
+- `rosepine` - Rosé Pine
+- `dracula` - Dracula
+- `everforest` - Everforest (dark medium)
+- `kanagawa` - Kanagawa Wave
+- `onedark` - One Dark
+- `solarized` - Solarized Dark
+- `oxocarbon` - Oxocarbon (IBM Carbon)
+- `ayu` - Ayu Mirage
+- `nightfox` - Nightfox
+- `monokai` - Monokai Pro
+
+Light:
+
+- `catppuccin-latte` - Catppuccin Latte
+- `rosepine-dawn` - Rosé Pine Dawn
+- `solarized-light` - Solarized Light
+
+### Picking a theme interactively
+
+Run the bundled picker from inside a tmux session to browse themes with a live
+preview - the status bar re-renders as you move through the list:
+
+```
+~/.config/tmux/plugins/tmux-statusline/theme-picker.sh
+```
+
+It uses [`fzf`](https://github.com/junegunn/fzf) for arrow-key live preview when
+available, and falls back to a plain numbered menu otherwise. `Enter` keeps the
+highlighted theme, `ESC` restores the one you started with. The change applies to
+the running server only; to make it permanent add the printed
+`set -g @statusline-theme '<name>'` line to your tmux config.
 
 To add one, drop a `themes/<name>.sh` file that sets the palette variables:
 
