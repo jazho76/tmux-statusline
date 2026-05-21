@@ -11,15 +11,22 @@ get_opt() {
 # Config params
 rdec=$(get_opt "@statusline-decorator-right" '')
 ldec=$(get_opt "@statusline-decorator-left" '')
-AC=$(get_opt "@statusline-accent-color" '#888888')
-PC=$(get_opt "@statusline-prefix-color" '#888888')
+# Theme: source the palette defaults, then let per-color options override.
+CURRENT_DIR="$(cd "$(dirname "$0")" && pwd)"
+theme=$(get_opt "@statusline-theme" 'mono')
+theme_file="$CURRENT_DIR/themes/$theme.sh"
+[ -f "$theme_file" ] || theme_file="$CURRENT_DIR/themes/mono.sh"
+. "$theme_file"
+
+AC=$(get_opt "@statusline-accent-color"  "$t_AC")
+PC=$(get_opt "@statusline-prefix-color"  "$t_PC")
 PI=$(get_opt "@statusline-prefix-icon" '')
 PL=$(get_opt "@statusline-prefix-label" '')
-G1=$(get_opt "@statusline-bg-color"      '#262626')
-G2=$(get_opt "@statusline-segment-color" '#3a3a3a')
-G3=$(get_opt "@statusline-border-color"  '#444444')
-G4=$(get_opt "@statusline-fg-color"      '#626262')
-G5=$(get_opt "@statusline-muted-color"   '#767676')
+G1=$(get_opt "@statusline-bg-color"      "$t_G1")
+G2=$(get_opt "@statusline-segment-color" "$t_G2")
+G3=$(get_opt "@statusline-border-color"  "$t_G3")
+G4=$(get_opt "@statusline-fg-color"      "$t_G4")
+G5=$(get_opt "@statusline-muted-color"   "$t_G5")
 FG="$G4"
 BG="$G1"
 

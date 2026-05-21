@@ -38,6 +38,7 @@ tmux source-file ~/.tmux.conf
 
 | Option                        | Default   | Description                                                |
 | ----------------------------- | --------- | ---------------------------------------------------------- |
+| `@statusline-theme`           | `mono`    | Named palette; individual `*-color` options override it    |
 | `@statusline-accent-color`    | `#888888` | Accent color (session block, windows, decorators, borders) |
 | `@statusline-prefix-color`    | `#888888` | Color of the leading prefix block and trailing pane block  |
 | `@statusline-bg-color`        | `#262626` | Bar background and dark text on the pills/active window    |
@@ -59,6 +60,40 @@ set -g @statusline-prefix-label 'host'
 set -g @statusline-decorator-right ''
 set -g @statusline-decorator-left  ''
 ```
+
+## Themes
+
+A theme supplies the whole palette in one option. Individual `@statusline-*-color`
+options still override whatever the theme sets, so you can pick a theme and tweak a
+single color per host.
+
+```
+set -g @statusline-theme 'mono'
+```
+
+Available themes:
+
+- `mono` - minimal grayscale (default)
+- `tokyonight` - Tokyo Night
+- `catppuccin` - Catppuccin Mocha
+- `nord` - Nord
+- `gruvbox` - Gruvbox dark
+- `rosepine` - Rose Pine
+
+To add one, drop a `themes/<name>.sh` file that sets the palette variables:
+
+```
+# themes/<name>.sh
+t_AC='#888888'  # accent
+t_PC='#888888'  # prefix
+t_G1='#262626'  # bg
+t_G2='#3a3a3a'  # segment
+t_G3='#444444'  # border
+t_G4='#626262'  # fg
+t_G5='#767676'  # muted
+```
+
+An unknown theme name falls back to `mono`.
 
 ## Optional Extensions
 
