@@ -78,10 +78,13 @@ Available themes:
 - `tokyonight` - Tokyo Night
 - `tokyonight-storm` - Tokyo Night Storm
 - `catppuccin` - Catppuccin Mocha
+- `catppuccin-frappe` - Catppuccin Frappé
+- `catppuccin-macchiato` - Catppuccin Macchiato
 - `nord` - Nord
 - `gruvbox` - Gruvbox dark
 - `gruvbox-material` - Gruvbox Material
 - `rosepine` - Rosé Pine
+- `rosepine-moon` - Rosé Pine Moon
 - `dracula` - Dracula
 - `everforest` - Everforest (dark medium)
 - `kanagawa` - Kanagawa Wave
@@ -90,7 +93,23 @@ Available themes:
 - `oxocarbon` - Oxocarbon (IBM Carbon)
 - `ayu` - Ayu Mirage
 - `nightfox` - Nightfox
+- `duskfox` - Duskfox (Nightfox)
+- `carbonfox` - Carbonfox (Nightfox)
+- `terafox` - Terafox (Nightfox)
 - `monokai` - Monokai Pro
+- `sonokai` - Sonokai
+- `edge` - Edge (dark)
+- `github-dark` - GitHub Dark
+- `github-dark-dimmed` - GitHub Dark Dimmed
+- `material` - Material (oceanic)
+- `material-palenight` - Material Palenight
+- `melange` - Melange (dark)
+- `iceberg` - Iceberg (dark)
+- `cyberdream` - Cyberdream
+- `vesper` - Vesper
+- `poimandres` - Poimandres
+- `flexoki` - Flexoki (dark)
+- `zenburn` - Zenburn
 
 ### Picking a theme interactively
 
