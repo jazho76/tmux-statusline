@@ -21,6 +21,7 @@ Inspired by [wfxr/tmux-power](https://github.com/wfxr/tmux-power/tree/master), b
 - tmux ≥ 3.2
 - Nerd Font (for icons and separators)
 - True color terminal recommended
+- [`fzf`](https://github.com/junegunn/fzf) — only for the interactive theme picker
 
 ## Installation (TPM)
 
@@ -101,18 +102,29 @@ Light:
 
 ### Picking a theme interactively
 
-Run the bundled picker from inside a tmux session to browse themes with a live
-preview - the status bar re-renders as you move through the list:
+The plugin registers a `statusline-theme` command. From inside a tmux session,
+press `prefix` + `:` and type:
+
+```
+statusline-theme
+```
+
+This opens an fzf popup to browse themes with a **live preview** - the status bar
+re-renders as you move through the list. `Enter` keeps the highlighted theme,
+`ESC` restores the one you started with.
+
+The choice is **persisted automatically** and survives restarts: it is saved to
+`${XDG_STATE_HOME:-~/.local/state}/tmux-statusline/theme`, which the plugin reads
+on load. A saved pick takes precedence over `@statusline-theme`; pick the
+`● use config default` entry at the top of the list to clear it and fall back to
+your configured theme.
+
+The picker requires [`fzf`](https://github.com/junegunn/fzf). You can also run it
+directly:
 
 ```
 ~/.config/tmux/plugins/tmux-statusline/theme-picker.sh
 ```
-
-It uses [`fzf`](https://github.com/junegunn/fzf) for arrow-key live preview when
-available, and falls back to a plain numbered menu otherwise. `Enter` keeps the
-highlighted theme, `ESC` restores the one you started with. The change applies to
-the running server only; to make it permanent add the printed
-`set -g @statusline-theme '<name>'` line to your tmux config.
 
 To add one, drop a `themes/<name>.sh` file that sets the palette variables:
 

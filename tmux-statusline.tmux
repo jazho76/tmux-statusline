@@ -12,8 +12,13 @@ get_opt() {
 rdec=$(get_opt "@statusline-decorator-right" '')
 ldec=$(get_opt "@statusline-decorator-left" '')
 # Theme: source the palette defaults, then let per-color options override.
+# An interactive pick (theme-picker.sh) lands in the state file and wins over
+# the @statusline-theme option; falling back to the option, then mono.
 CURRENT_DIR="$(cd "$(dirname "$0")" && pwd)"
-theme=$(get_opt "@statusline-theme" 'mono')
+theme=""
+state_file="${XDG_STATE_HOME:-$HOME/.local/state}/tmux-statusline/theme"
+[ -r "$state_file" ] && IFS= read -r theme < "$state_file" 2>/dev/null
+[ -n "$theme" ] || theme=$(get_opt "@statusline-theme" 'mono')
 theme_file="$CURRENT_DIR/themes/$theme.sh"
 [ -f "$theme_file" ] || theme_file="$CURRENT_DIR/themes/mono.sh"
 . "$theme_file"
@@ -79,4 +84,17 @@ set_opt message-command-style "fg=$AC,bg=$BG"
 # Clock
 set_opt clock-mode-colour "$AC"
 set_opt clock-mode-style 24
+
+# Theme picker command: run it from the prompt with `prefix + :` then type
+# `statusline-theme`. Reuse our slot if already registered so reloads stay
+# idempotent; otherwise let tmux append a fresh array index, which never
+# clobbers tmux's built-in aliases or another plugin's.
+picker_cmd="display-popup -w 70% -h 60% -E '$CURRENT_DIR/theme-picker.sh'"
+alias_idx=$(tmux show-options -g command-alias 2>/dev/null \
+  | awk -F'[][]' '/statusline-theme=/ { print $2; exit }')
+if [ -n "$alias_idx" ]; then
+  set_opt "command-alias[$alias_idx]" "statusline-theme=$picker_cmd"
+else
+  tmux set-option -gqa command-alias "statusline-theme=$picker_cmd"
+fi
 
