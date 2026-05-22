@@ -74,8 +74,6 @@ set -g @statusline-theme 'mono'
 
 Available themes:
 
-Dark:
-
 - `mono` - minimal grayscale (default)
 - `tokyonight` - Tokyo Night
 - `tokyonight-storm` - Tokyo Night Storm
@@ -93,12 +91,6 @@ Dark:
 - `ayu` - Ayu Mirage
 - `nightfox` - Nightfox
 - `monokai` - Monokai Pro
-
-Light:
-
-- `catppuccin-latte` - Catppuccin Latte
-- `rosepine-dawn` - Rosé Pine Dawn
-- `solarized-light` - Solarized Light
 
 ### Picking a theme interactively
 
