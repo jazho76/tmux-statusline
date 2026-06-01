@@ -68,7 +68,7 @@ set_opt display-panes-colour "$G3"
 set_opt display-panes-active-colour "$AC"
 
 # Popup border
-set_opt popup-border-style "fg=$G3,bg=default"
+set_opt popup-border-style "fg=$AC,bg=default"
 set_opt popup-border-lines "rounded"
 
 # Window status format
