@@ -15,6 +15,7 @@ Inspired by [wfxr/tmux-power](https://github.com/wfxr/tmux-power/tree/master), b
 - Pane title on the right for context
 - Optional Pomodoro integration
 - Per-environment overrides (color, icon, label, decorators) for distinguishing machines at a glance
+- Per-pane badges any tool can raise, surfaced on the window that holds the pane
 
 ## Requirements
 
@@ -51,6 +52,13 @@ tmux source-file ~/.tmux.conf
 | `@statusline-prefix-label`    | (empty)   | Optional short label rendered next to the prefix icon      |
 | `@statusline-decorator-right` | ``       | Right-pointing segment separator                           |
 | `@statusline-decorator-left`  | ``       | Left-pointing segment separator                            |
+| `@statusline-badges`          | (empty)   | Space-separated badge class names; see [Badges](#badges)   |
+| `@statusline-badge-separator` | (space)   | Emitted after every badge glyph                            |
+| `@statusline-badge-glyph`     | `●`       | Glyph used when no classes are declared                    |
+| `@statusline-badge-style`     | (empty)   | Style for that default glyph, e.g. `fg=red,bold`           |
+
+Any option can be set to an empty string to switch that piece off, including
+ones with a non-empty default such as the decorators and the prefix icon.
 
 Example: per-host coloring and labeling so the same statusline reads differently across machines (drop into `~/.config/tmux/local.conf` or equivalent):
 
@@ -61,6 +69,64 @@ set -g @statusline-prefix-label 'host'
 set -g @statusline-decorator-right ''
 set -g @statusline-decorator-left  ''
 ```
+
+## Badges
+
+Any tool can badge the pane it runs in, and the window holding that pane shows a
+glyph for it. It is a way to surface background state on windows you are *not*
+looking at: a finished build, a watcher gone red, a process waiting on input.
+
+The writer only ever names a class. Glyphs and styles live here, in the
+statusline:
+
+```sh
+tmux set  -p -t "$TMUX_PANE" @statusline-badge done
+tmux set -pu -t "$TMUX_PANE" @statusline-badge
+```
+
+```
+set -g @statusline-badges 'running done failed'
+set -g @statusline-badge-running-glyph ''
+set -g @statusline-badge-done-glyph    ''
+set -g @statusline-badge-done-style    'fg=green'
+set -g @statusline-badge-failed-glyph  ''
+set -g @statusline-badge-failed-style  'fg=red,bold'
+```
+
+Each class reads `@statusline-badge-<class>-glyph` and
+`@statusline-badge-<class>-style`. A style is written in normal tmux syntax and
+may contain commas; it is split apart before it reaches the format.
+
+Wrapping a long command is then a one-liner:
+
+```sh
+tmux set -p -t "$TMUX_PANE" @statusline-badge running
+make && tmux set -p -t "$TMUX_PANE" @statusline-badge done \
+     || tmux set -p -t "$TMUX_PANE" @statusline-badge failed
+```
+
+Behaviour worth knowing:
+
+- Every badged pane contributes its own glyph, in pane order, so a window
+  running two jobs shows two glyphs rather than one.
+- A value that is not a declared class contributes nothing at all, not even
+  padding.
+- Class names may contain letters, digits, `-` and `_`. Anything else is skipped,
+  since a class name reaches the format as a literal.
+- With no `@statusline-badges` declared, any non-empty value renders
+  `@statusline-badge-glyph`, so a single generic badge needs no configuration.
+- Setting a class glyph to `''` disables that class; emptying
+  `@statusline-badge-glyph` disables badges entirely.
+- Badging a *window* (`set -w`) works too, since the option lookup walks pane
+  then window. Never badge globally or per-session: that same walk would badge
+  every window.
+- Glyphs drawn wider than their cell (any East Asian Ambiguous character, which
+  most geometric shapes are) bleed into each other, which is what
+  `@statusline-badge-separator` defaults to a space for. Set it to `''` for
+  tighter badges once you know your glyphs are single-cell; a gap before the
+  window name is kept either way.
+- Classes, glyphs, styles and the separator are baked in when the plugin runs,
+  so changing them needs a config reload. Badge values themselves are live.
 
 ## Themes
 

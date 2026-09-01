@@ -4,8 +4,7 @@ set_opt() {
 
 get_opt() {
   local val
-  val=$(tmux show-option -gqv "$1")
-  echo "${val:-$2}"
+  if val=$(tmux show-option -gv "$1" 2>/dev/null); then printf '%s' "$val"; else printf '%s' "$2"; fi
 }
 
 # Config params
@@ -34,6 +33,12 @@ G4=$(get_opt "@statusline-fg-color"      "$t_G4")
 G5=$(get_opt "@statusline-muted-color"   "$t_G5")
 FG="$G4"
 BG="$G1"
+
+if [ -f "$CURRENT_DIR/badges.sh" ]; then
+  . "$CURRENT_DIR/badges.sh"
+  BADGE=$(badges_format "#[fg=$AC]")
+  BADGE_CURRENT=$(badges_format "#[fg=$BG]#[bold]")
+fi
 
 # Status options
 set_opt status on
@@ -72,8 +77,8 @@ set_opt popup-border-style "fg=$AC,bg=default"
 set_opt popup-border-lines "rounded"
 
 # Window status format
-set_opt window-status-format         "#[fg=$BG,bg=$G2]$rdec#[fg=$AC,bg=$G2] #I:#W #[fg=$G2,bg=$BG]$rdec"
-set_opt window-status-current-format "#[fg=$BG,bg=$AC]$rdec#[fg=$BG,bg=$AC,bold] #I:#W #[fg=$AC,bg=$BG,nobold]$rdec"
+set_opt window-status-format         "#[fg=$BG,bg=$G2]$rdec#[fg=$AC,bg=$G2] $BADGE#I:#W #[fg=$G2,bg=$BG]$rdec"
+set_opt window-status-current-format "#[fg=$BG,bg=$AC]$rdec#[fg=$BG,bg=$AC,bold] $BADGE_CURRENT#I:#W #[fg=$AC,bg=$BG,nobold]$rdec"
 
 # Window
 set_opt window-status-style          "fg=$AC,bg=$BG,none"
