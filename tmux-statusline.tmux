@@ -4,7 +4,7 @@ set_opt() {
 
 get_opt() {
   local val
-  if val=$(tmux show-option -gv "$1" 2>/dev/null); then printf '%s' "$val"; else printf '%s' "$2"; fi
+  if val=$(tmux show-option -gv "$1" 2>/dev/null) && [ -n "$val" ]; then printf '%s' "$val"; else printf '%s' "$2"; fi
 }
 
 # Config params
