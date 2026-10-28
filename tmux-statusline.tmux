@@ -88,8 +88,9 @@ set_opt window-status-activity-style "fg=$AC,bg=$BG,bold"
 set_opt window-status-separator ""
 
 # Messages
-set_opt message-style "fg=$AC,bg=$BG"
-set_opt message-command-style "fg=$AC,bg=$BG"
+fill_unless_pane_or_mode='#{?#{m/r:(^|#,)IS(PANE|MODE)($|#,),#{prompt_flags}},,fill='
+set_opt message-style "fg=$AC,bg=$BG,${fill_unless_pane_or_mode}$BG}"
+set_opt message-command-style "fg=$AC,bg=$BG,${fill_unless_pane_or_mode}$BG}"
 
 # Clock
 set_opt clock-mode-colour "$AC"
