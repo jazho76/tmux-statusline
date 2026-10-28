@@ -82,6 +82,7 @@ set_opt window-status-current-format "#[fg=$BG,bg=$AC]$rdec#[fg=$BG,bg=$AC,bold]
 
 # Window
 set_opt window-status-style          "fg=$AC,bg=$BG,none"
+set_opt window-status-current-style  "fg=$AC,bg=$BG,none"
 set_opt window-status-last-style     "fg=$AC,bg=$BG,bold"
 set_opt window-status-activity-style "fg=$AC,bg=$BG,bold"
 set_opt window-status-separator ""
